@@ -1,0 +1,338 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/index.json",
+  "title": "Forgepoint Schema Registry",
+  "description": "Registry of all available Forgepoint document schemas",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0",
+      "description": "Schema registry version"
+    },
+    "schemas": {
+      "type": "object",
+      "description": "Map of document types to their schema definitions",
+      "additionalProperties": false,
+      "properties": {
+        "story": { "$ref": "story.json" },
+        "prd": { "$ref": "prd.json" },
+        "okr": { "$ref": "okr.json" },
+        "scenario": { "$ref": "scenario.json" },
+        "prfaq": { "$ref": "prfaq.json" },
+        "mrd": { "$ref": "mrd.json" },
+        "brd": { "$ref": "brd.json" },
+        "one-pager": { "$ref": "one-pager.json" },
+        "opportunity-assessment": { "$ref": "opportunity-assessment.json" },
+        "product-brief": { "$ref": "product-brief.json" },
+        "vision-strategy": { "$ref": "vision-strategy.json" },
+        "product-roadmap": { "$ref": "product-roadmap.json" },
+        "use-case": { "$ref": "use-case.json" },
+        "jtbd": { "$ref": "jtbd.json" },
+        "user-journey": { "$ref": "user-journey.json" },
+        "technical-spec": { "$ref": "technical-spec.json" },
+        "api-spec": { "$ref": "api-spec.json" },
+        "epic": { "$ref": "epic.json" },
+        "task": { "$ref": "task.json" },
+        "sprint-plan": { "$ref": "sprint-plan.json" },
+        "adr": { "$ref": "adr.json" },
+        "rfc": { "$ref": "rfc.json" },
+        "design-doc": { "$ref": "design-doc.json" },
+        "risk-register": { "$ref": "risk-register.json" },
+        "test-case": { "$ref": "test-case.json" },
+        "test-plan": { "$ref": "test-plan.json" },
+        "test-results": { "$ref": "test-results.json" },
+        "bug-report": { "$ref": "bug-report.json" },
+        "release-notes": { "$ref": "release-notes.json" },
+        "changelog": { "$ref": "changelog.json" },
+        "deployment-plan": { "$ref": "deployment-plan.json" },
+        "runbook": { "$ref": "runbook.json" },
+        "postmortem": { "$ref": "postmortem.json" },
+        "retrospective": { "$ref": "retrospective.json" },
+        "feature-flag": { "$ref": "feature-flag.json" },
+        "safe-feature": { "$ref": "safe-feature.json" },
+        "shape-up-pitch": { "$ref": "shape-up-pitch.json" }
+      }
+    },
+    "documentTypes": {
+      "type": "array",
+      "description": "List of all supported document types",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string", "description": "Document type identifier" },
+          "name": { "type": "string", "description": "Human-readable name" },
+          "description": { "type": "string", "description": "Document type description" },
+          "category": { 
+            "type": "string", 
+            "enum": ["discovery", "design", "development", "testing", "release"],
+            "description": "SDLC category" 
+          },
+          "schema": { "type": "string", "format": "uri", "description": "Schema file reference" }
+        },
+        "required": ["type", "name", "description", "category", "schema"]
+      }
+    }
+  },
+  "required": ["schemaVersion", "schemas", "documentTypes"],
+  "documentTypes": [
+    {
+      "type": "story",
+      "name": "User Story",
+      "description": "Agile user story with acceptance criteria and scenarios",
+      "category": "design",
+      "schema": "story.json"
+    },
+    {
+      "type": "prd",
+      "name": "Product Requirements Document",
+      "description": "Comprehensive product specification and requirements",
+      "category": "discovery",
+      "schema": "prd.json"
+    },
+    {
+      "type": "okr",
+      "name": "Objectives and Key Results",
+      "description": "Goal setting and progress tracking document",
+      "category": "discovery",
+      "schema": "okr.json"
+    },
+    {
+      "type": "scenario",
+      "name": "BDD Scenario",
+      "description": "Behavior-driven development test scenarios in Gherkin format",
+      "category": "testing",
+      "schema": "scenario.json"
+    },
+    {
+      "type": "prfaq",
+      "name": "Press Release + FAQ",
+      "description": "Amazon-style working backwards document with press release and FAQ",
+      "category": "discovery",
+      "schema": "prfaq.json"
+    },
+    {
+      "type": "mrd",
+      "name": "Market Requirements Document",
+      "description": "Market research and requirements analysis",
+      "category": "discovery",
+      "schema": "mrd.json"
+    },
+    {
+      "type": "brd",
+      "name": "Business Requirements Document",
+      "description": "Business objectives, scope, and requirements",
+      "category": "discovery",
+      "schema": "brd.json"
+    },
+    {
+      "type": "one-pager",
+      "name": "One-Pager",
+      "description": "Executive summary document for decision makers",
+      "category": "discovery",
+      "schema": "one-pager.json"
+    },
+    {
+      "type": "opportunity-assessment",
+      "name": "Opportunity Assessment",
+      "description": "Marty Cagan-style opportunity evaluation framework",
+      "category": "discovery",
+      "schema": "opportunity-assessment.json"
+    },
+    {
+      "type": "product-brief",
+      "name": "Product Brief",
+      "description": "Lightweight product specification document",
+      "category": "discovery",
+      "schema": "product-brief.json"
+    },
+    {
+      "type": "vision-strategy",
+      "name": "Vision & Strategy",
+      "description": "Long-term product vision and strategic direction",
+      "category": "discovery",
+      "schema": "vision-strategy.json"
+    },
+    {
+      "type": "product-roadmap",
+      "name": "Product Roadmap",
+      "description": "Timeline and milestones for product development",
+      "category": "discovery",
+      "schema": "product-roadmap.json"
+    },
+    {
+      "type": "use-case",
+      "name": "Use Case",
+      "description": "Traditional use case with actors and scenarios",
+      "category": "design",
+      "schema": "use-case.json"
+    },
+    {
+      "type": "jtbd",
+      "name": "Jobs-to-be-Done",
+      "description": "Clayton Christensen's jobs-to-be-done framework",
+      "category": "design",
+      "schema": "jtbd.json"
+    },
+    {
+      "type": "user-journey",
+      "name": "User Journey",
+      "description": "End-to-end user experience mapping",
+      "category": "design",
+      "schema": "user-journey.json"
+    },
+    {
+      "type": "technical-spec",
+      "name": "Technical Specification",
+      "description": "Detailed technical system specification",
+      "category": "design",
+      "schema": "technical-spec.json"
+    },
+    {
+      "type": "api-spec",
+      "name": "API Specification",
+      "description": "REST, GraphQL, or gRPC API specification",
+      "category": "design",
+      "schema": "api-spec.json"
+    },
+    {
+      "type": "epic",
+      "name": "Epic",
+      "description": "Large feature or initiative containing multiple user stories",
+      "category": "development",
+      "schema": "epic.json"
+    },
+    {
+      "type": "task",
+      "name": "Task",
+      "description": "Individual development task or subtask",
+      "category": "development",
+      "schema": "task.json"
+    },
+    {
+      "type": "sprint-plan",
+      "name": "Sprint Plan",
+      "description": "Agile sprint planning and backlog document",
+      "category": "development",
+      "schema": "sprint-plan.json"
+    },
+    {
+      "type": "adr",
+      "name": "Architecture Decision Record",
+      "description": "Document capturing architectural decisions and rationale",
+      "category": "development",
+      "schema": "adr.json"
+    },
+    {
+      "type": "rfc",
+      "name": "Request for Comments",
+      "description": "Technical proposal for review and discussion",
+      "category": "development",
+      "schema": "rfc.json"
+    },
+    {
+      "type": "design-doc",
+      "name": "Design Document",
+      "description": "Technical design document for system or component",
+      "category": "development",
+      "schema": "design-doc.json"
+    },
+    {
+      "type": "risk-register",
+      "name": "Risk Register",
+      "description": "Project or product risk tracking and mitigation",
+      "category": "development",
+      "schema": "risk-register.json"
+    },
+    {
+      "type": "test-case",
+      "name": "Test Case",
+      "description": "Detailed test case with steps and expected results",
+      "category": "testing",
+      "schema": "test-case.json"
+    },
+    {
+      "type": "test-plan",
+      "name": "Test Plan",
+      "description": "Comprehensive testing strategy and plan",
+      "category": "testing",
+      "schema": "test-plan.json"
+    },
+    {
+      "type": "test-results",
+      "name": "Test Results",
+      "description": "Test execution results and analysis",
+      "category": "testing",
+      "schema": "test-results.json"
+    },
+    {
+      "type": "bug-report",
+      "name": "Bug Report",
+      "description": "Issue report with reproduction steps and details",
+      "category": "testing",
+      "schema": "bug-report.json"
+    },
+    {
+      "type": "release-notes",
+      "name": "Release Notes",
+      "description": "User-facing documentation of changes in a release",
+      "category": "release",
+      "schema": "release-notes.json"
+    },
+    {
+      "type": "changelog",
+      "name": "Changelog",
+      "description": "Developer-facing log of all product changes",
+      "category": "release",
+      "schema": "changelog.json"
+    },
+    {
+      "type": "deployment-plan",
+      "name": "Deployment Plan",
+      "description": "Step-by-step deployment strategy and rollout plan",
+      "category": "release",
+      "schema": "deployment-plan.json"
+    },
+    {
+      "type": "runbook",
+      "name": "Runbook",
+      "description": "Operational procedures for system maintenance",
+      "category": "release",
+      "schema": "runbook.json"
+    },
+    {
+      "type": "postmortem",
+      "name": "Post-mortem",
+      "description": "Incident analysis and lessons learned document",
+      "category": "release",
+      "schema": "postmortem.json"
+    },
+    {
+      "type": "retrospective",
+      "name": "Retrospective",
+      "description": "Sprint or project retrospective with lessons learned",
+      "category": "release",
+      "schema": "retrospective.json"
+    },
+    {
+      "type": "feature-flag",
+      "name": "Feature Flag",
+      "description": "Feature toggle documentation and rollout plan",
+      "category": "release",
+      "schema": "feature-flag.json"
+    },
+    {
+      "type": "safe-feature",
+      "name": "SAFe Feature",
+      "description": "Scaled Agile Framework (SAFe) feature document",
+      "category": "development",
+      "schema": "safe-feature.json"
+    },
+    {
+      "type": "shape-up-pitch",
+      "name": "Shape Up Pitch",
+      "description": "Basecamp's Shape Up methodology pitch document",
+      "category": "discovery",
+      "schema": "shape-up-pitch.json"
+    }
+  ]
+}

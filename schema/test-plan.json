@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/test-plan-v1.0.json",
+  "title": "Forgepoint Test Plan Schema",
+  "description": "Schema for Test Plan documents in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "test-plan",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this test plan"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "review", "approved", "active", "completed", "archived"],
+      "description": "Current status of the test plan"
+    },
+    "test-level": {
+      "type": "string",
+      "enum": ["unit", "integration", "system", "acceptance", "regression", "performance"],
+      "description": "Level of testing"
+    },
+    "scope": {
+      "type": "string",
+      "description": "Testing scope or features covered"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version being tested"
+    },
+    "test-manager": {
+      "type": "string",
+      "description": "Test manager or lead"
+    },
+    "test-team": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Testing team members"
+    },
+    "test-environment": {
+      "type": "string",
+      "description": "Test environment details"
+    },
+    "start-date": {
+      "type": "string",
+      "format": "date",
+      "description": "Testing start date (YYYY-MM-DD)"
+    },
+    "end-date": {
+      "type": "string",
+      "format": "date",
+      "description": "Testing end date (YYYY-MM-DD)"
+    },
+    "entry-criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Criteria to start testing"
+    },
+    "exit-criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Criteria to complete testing"
+    },
+    "risk-level": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Overall risk level"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "author": {
+      "type": "string",
+      "description": "Test plan author"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "test-level", "scope", "test-manager", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "description": "Document must have a level-0 title"
+    },
+    "sections": {
+      "required": [
+        "Objectives",
+        "Scope",
+        "Test Strategy",
+        "Test Cases",
+        "Resources",
+        "Schedule"
+      ],
+      "optional": [
+        "Background",
+        "Assumptions",
+        "Constraints",
+        "Risk Analysis",
+        "Deliverables",
+        "Suspension Criteria",
+        "Approval"
+      ],
+      "description": "Required and optional sections for test plan documents"
+    }
+  }
+}

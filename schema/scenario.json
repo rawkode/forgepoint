@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/scenario-v1.0.json",
+  "title": "Forgepoint BDD Scenario Schema",
+  "description": "Schema for BDD scenario documents in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "scenario",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this scenario"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "ready", "automated", "passing", "failing", "deprecated"],
+      "description": "Current status of the scenario"
+    },
+    "feature": {
+      "type": "string",
+      "description": "Feature this scenario belongs to"
+    },
+    "story": {
+      "type": "string",
+      "description": "User story this scenario relates to (reference ID)"
+    },
+    "test-type": {
+      "type": "string",
+      "enum": ["unit", "integration", "e2e", "manual"],
+      "description": "Type of test"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Test priority"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Test tags (e.g., @smoke, @regression)"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "author": {
+      "type": "string",
+      "description": "Scenario author"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "feature", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "description": "Document must have a level-0 title"
+    },
+    "sections": {
+      "required": ["Scenarios"],
+      "optional": ["Background", "Test Data", "Notes"],
+      "description": "Required and optional sections for scenario documents"
+    },
+    "gherkinFormat": {
+      "required": true,
+      "description": "Scenarios section must contain Gherkin-formatted scenarios in code blocks",
+      "syntax": "gherkin"
+    }
+  }
+}

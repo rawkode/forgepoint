@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/mrd-v1.0.json",
+  "title": "Forgepoint Market Requirements Document Schema",
+  "description": "Schema for Market Requirements Document (MRD) in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "mrd",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this MRD"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "review", "approved", "archived"],
+      "description": "Current status of the MRD"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$",
+      "description": "Document version (e.g., 1.0, 2.1.3)"
+    },
+    "market": {
+      "type": "string",
+      "description": "Target market or segment"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Market requirements owner"
+    },
+    "stakeholders": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Key stakeholders"
+    },
+    "research-date": {
+      "type": "string",
+      "format": "date",
+      "description": "Market research date (YYYY-MM-DD)"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "author": {
+      "type": "string",
+      "description": "MRD author"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "version", "market", "owner", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "description": "Document must have a level-0 title"
+    },
+    "sections": {
+      "required": [
+        "Market Overview",
+        "Customer Analysis", 
+        "Competitive Analysis",
+        "Market Requirements"
+      ],
+      "optional": [
+        "Executive Summary",
+        "Market Size",
+        "Trends",
+        "Opportunities",
+        "Threats",
+        "Go-to-Market Strategy"
+      ],
+      "description": "Required and optional sections for MRD documents"
+    }
+  }
+}

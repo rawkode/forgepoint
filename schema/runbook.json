@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/runbook-v1.0.json",
+  "title": "Forgepoint Runbook Schema",
+  "description": "Schema for Operational Runbook documents in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "runbook",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this runbook"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "review", "approved", "active", "deprecated"],
+      "description": "Current status of the runbook"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["incident-response", "maintenance", "deployment", "monitoring", "troubleshooting"],
+      "description": "Type of operational runbook"
+    },
+    "service": {
+      "type": "string",
+      "description": "Service or system this runbook covers"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Severity level for incident runbooks"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Runbook owner"
+    },
+    "on-call-team": {
+      "type": "string",
+      "description": "Responsible on-call team"
+    },
+    "escalation": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Escalation contacts"
+    },
+    "frequency": {
+      "type": "string",
+      "description": "How often this procedure is run"
+    },
+    "estimated-time": {
+      "type": "string",
+      "description": "Estimated execution time"
+    },
+    "last-tested": {
+      "type": "string",
+      "format": "date",
+      "description": "Last time runbook was tested (YYYY-MM-DD)"
+    },
+    "next-review": {
+      "type": "string",
+      "format": "date",
+      "description": "Next review date (YYYY-MM-DD)"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "author": {
+      "type": "string",
+      "description": "Runbook author"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "type", "service", "owner", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "description": "Document must have a level-0 title"
+    },
+    "sections": {
+      "required": [
+        "Overview",
+        "Prerequisites",
+        "Procedure",
+        "Verification"
+      ],
+      "optional": [
+        "Symptoms",
+        "Investigation Steps",
+        "Resolution Steps",
+        "Prevention",
+        "Related Runbooks",
+        "References",
+        "Change History"
+      ],
+      "description": "Required and optional sections for runbook documents"
+    }
+  }
+}

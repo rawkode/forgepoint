@@ -1,0 +1,60 @@
+# Forgepoint Development TODO
+
+## Completed ✅
+- [x] Design schema definition approach for AsciiDoc documents
+- [x] Create JSON Schema for document metadata validation (37 schemas created)
+- [x] Define document structure conventions
+- [x] Create Discovery & Planning schemas (PRFAQ, MRD, BRD, etc.)
+- [x] Create Design & Specification schemas
+- [x] Create Development schemas
+- [x] Create Testing & Quality schemas
+- [x] Create Release & Operations schemas
+- [x] Create Methodology-specific schemas
+- [x] Update schema registry index
+- [x] Create remaining schemas (30+ more document types)
+
+## In Progress 🚧
+- [ ] Build linter for schema validation (Rust CLI implementation)
+- [ ] Rebuild CLI in Rust (partially complete - needs compilation fixes)
+
+## High Priority 🔥
+- [ ] Fix Rust toolchain and get CLI compiling
+- [ ] Complete Rust CLI implementation
+- [ ] Add missing dependencies and fix compilation errors
+- [ ] Test CLI with example documents
+- [ ] Create comprehensive test suite for Rust CLI
+
+## Medium Priority 📋
+- [ ] VS Code extension implementation
+- [ ] Astro plugin for web viewer
+- [ ] Mobile app prototypes
+- [ ] Documentation and examples
+- [ ] CI/CD pipeline setup
+
+## Schema System (37/37 Complete) ✅
+- [x] story, prd, okr, scenario, prfaq, mrd, brd
+- [x] one-pager, opportunity-assessment, product-brief
+- [x] vision-strategy, product-roadmap, use-case
+- [x] jtbd, user-journey, technical-spec, api-spec
+- [x] epic, task, sprint-plan, adr, rfc, design-doc
+- [x] risk-register, test-case, test-plan, test-results
+- [x] bug-report, release-notes, changelog
+- [x] deployment-plan, runbook, postmortem
+- [x] retrospective, feature-flag, safe-feature
+- [x] shape-up-pitch
+
+## Architecture Overview ✅
+- [x] Monorepo structure defined
+- [x] Schema system with AsciiDoc-native attributes
+- [x] Type-prefixed semantic IDs (story:auth-login)
+- [x] Cross-references (xref:story:my-feature)
+- [x] Git-native approach with no workflow opinions
+
+## Next Steps 🎯
+1. Fix Rust compilation issues
+2. Complete CLI implementation 
+3. Test with real documents
+4. Build VS Code extension
+5. Create Astro web viewer
+6. Document everything
+7. Release MVP

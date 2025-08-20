@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/test-case-v1.0.json",
+  "title": "Forgepoint Test Case Schema",
+  "description": "Schema for Test Case documents in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "test-case",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this test case"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "ready", "active", "deprecated"],
+      "description": "Current status of the test case"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["functional", "non-functional", "integration", "unit", "e2e", "performance", "security"],
+      "description": "Test case type"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Test priority"
+    },
+    "component": {
+      "type": "string",
+      "description": "Component or module being tested"
+    },
+    "feature": {
+      "type": "string",
+      "description": "Feature being tested"
+    },
+    "story": {
+      "type": "string",
+      "description": "Related user story (reference ID)"
+    },
+    "automated": {
+      "type": "boolean",
+      "description": "Whether test is automated"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Test tags (smoke, regression, etc.)"
+    },
+    "estimated-duration": {
+      "type": "string",
+      "description": "Estimated execution time"
+    },
+    "author": {
+      "type": "string",
+      "description": "Test case author"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "type", "priority", "component", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "description": "Document must have a level-0 title"
+    },
+    "sections": {
+      "required": [
+        "Preconditions",
+        "Test Steps",
+        "Expected Results"
+      ],
+      "optional": [
+        "Objective",
+        "Test Data",
+        "Postconditions", 
+        "Notes",
+        "Attachments"
+      ],
+      "description": "Required and optional sections for test case documents"
+    }
+  }
+}

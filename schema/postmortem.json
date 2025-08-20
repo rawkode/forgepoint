@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/postmortem-v1.0.json",
+  "title": "Forgepoint Post-mortem Schema",
+  "description": "Schema for Post-mortem/Incident Analysis documents in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "postmortem",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this postmortem"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "review", "approved", "published"],
+      "description": "Current status of the postmortem"
+    },
+    "incident-id": {
+      "type": "string",
+      "description": "Related incident identifier"
+    },
+    "incident-date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the incident occurred"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Incident severity"
+    },
+    "duration": {
+      "type": "string",
+      "description": "Total incident duration"
+    },
+    "impact": {
+      "type": "string",
+      "description": "Business/user impact description"
+    },
+    "services-affected": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Affected services or systems"
+    },
+    "incident-commander": {
+      "type": "string",
+      "description": "Incident commander"
+    },
+    "response-team": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Incident response team members"
+    },
+    "blameless": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this is a blameless postmortem"
+    },
+    "customer-facing": {
+      "type": "boolean",
+      "description": "Whether incident was customer-facing"
+    },
+    "sla-breach": {
+      "type": "boolean",
+      "description": "Whether SLA was breached"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "author": {
+      "type": "string",
+      "description": "Postmortem author"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "incident-date", "severity", "impact", "incident-commander", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "description": "Document must have a level-0 title"
+    },
+    "sections": {
+      "required": [
+        "Summary",
+        "Timeline",
+        "Root Cause Analysis",
+        "Action Items"
+      ],
+      "optional": [
+        "Executive Summary",
+        "Impact Assessment",
+        "Detection",
+        "Response",
+        "Recovery",
+        "What Went Well",
+        "What Went Wrong",
+        "Where We Got Lucky",
+        "Prevention Measures",
+        "Lessons Learned"
+      ],
+      "description": "Required and optional sections for postmortem documents"
+    }
+  }
+}

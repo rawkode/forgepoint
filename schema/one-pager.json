@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/one-pager-v1.0.json",
+  "title": "Forgepoint One-Pager Schema",
+  "description": "Schema for One-Pager executive summary documents in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "one-pager",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this one-pager"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "review", "approved", "presented", "archived"],
+      "description": "Current status of the one-pager"
+    },
+    "audience": {
+      "type": "string",
+      "enum": ["executives", "stakeholders", "board", "investors", "team"],
+      "description": "Target audience"
+    },
+    "presenter": {
+      "type": "string",
+      "description": "Person presenting the one-pager"
+    },
+    "presentation-date": {
+      "type": "string",
+      "format": "date",
+      "description": "Scheduled presentation date (YYYY-MM-DD)"
+    },
+    "decision-needed": {
+      "type": "boolean",
+      "description": "Whether this one-pager requires a decision"
+    },
+    "budget-requested": {
+      "type": "string",
+      "description": "Budget being requested (if applicable)"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "author": {
+      "type": "string",
+      "description": "One-pager author"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "audience", "presenter", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "description": "Document must have a level-0 title"
+    },
+    "sections": {
+      "required": [
+        "Problem",
+        "Solution", 
+        "Impact",
+        "Ask"
+      ],
+      "optional": [
+        "Background",
+        "Market Opportunity",
+        "Competition",
+        "Timeline",
+        "Resources Needed",
+        "Risks",
+        "Next Steps"
+      ],
+      "description": "Required and optional sections for one-pager documents"
+    },
+    "length": {
+      "maximum": "1 page",
+      "description": "Document should fit on one page when printed"
+    }
+  }
+}

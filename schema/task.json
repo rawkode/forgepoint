@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/task-v1.0.json",
+  "title": "Forgepoint Task Schema",
+  "description": "Schema for Task/Subtask documents in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "task",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this task"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["todo", "in-progress", "blocked", "review", "done", "cancelled"],
+      "description": "Current status of the task"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["development", "bug", "research", "documentation", "testing", "deployment"],
+      "description": "Type of task"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "urgent"],
+      "description": "Task priority"
+    },
+    "points": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "description": "Story points or effort estimate"
+    },
+    "parent": {
+      "type": "string",
+      "description": "Parent epic or story (reference ID)"
+    },
+    "assignee": {
+      "type": "string",
+      "description": "Person assigned to this task"
+    },
+    "team": {
+      "type": "string",
+      "description": "Responsible team"
+    },
+    "sprint": {
+      "type": "string",
+      "description": "Sprint identifier"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Task labels or tags"
+    },
+    "blocked-reason": {
+      "type": "string",
+      "description": "Reason if task is blocked"
+    },
+    "due-date": {
+      "type": "string",
+      "format": "date",
+      "description": "Task due date (YYYY-MM-DD)"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "author": {
+      "type": "string",
+      "description": "Task author"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "type", "priority", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "description": "Document must have a level-0 title"
+    },
+    "sections": {
+      "required": [
+        "Description"
+      ],
+      "optional": [
+        "Acceptance Criteria",
+        "Technical Notes",
+        "Dependencies",
+        "Subtasks",
+        "Related Items",
+        "Comments"
+      ],
+      "description": "Required and optional sections for task documents"
+    }
+  }
+}

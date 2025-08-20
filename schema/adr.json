@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/adr-v1.0.json",
+  "title": "Forgepoint Architecture Decision Record Schema",
+  "description": "Schema for Architecture Decision Record (ADR) documents in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "adr",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this ADR"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "accepted", "deprecated", "superseded"],
+      "description": "Current status of the ADR"
+    },
+    "number": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Sequential ADR number"
+    },
+    "decision": {
+      "type": "string",
+      "description": "Brief decision summary"
+    },
+    "deciders": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "People involved in the decision"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Decision date (YYYY-MM-DD)"
+    },
+    "superseded-by": {
+      "type": "string",
+      "description": "ADR that supersedes this one (if applicable)"
+    },
+    "supersedes": {
+      "type": "string",
+      "description": "ADR that this supersedes (if applicable)"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "author": {
+      "type": "string",
+      "description": "ADR author"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "number", "decision", "deciders", "date", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "format": "ADR-{number}: {decision}",
+      "description": "Title must follow ADR numbering format"
+    },
+    "sections": {
+      "required": [
+        "Context",
+        "Decision", 
+        "Consequences"
+      ],
+      "optional": [
+        "Status",
+        "Options Considered",
+        "Pros and Cons",
+        "Links"
+      ],
+      "description": "Required and optional sections for ADR documents"
+    }
+  }
+}

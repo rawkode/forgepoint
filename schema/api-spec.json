@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/api-spec-v1.0.json",
+  "title": "Forgepoint API Specification Schema",
+  "description": "Schema for API Specification documents in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "api-spec",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this API spec"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "review", "approved", "implemented", "deprecated"],
+      "description": "Current status of the API spec"
+    },
+    "api-version": {
+      "type": "string",
+      "pattern": "^v\\d+(\\.\\d+)?$",
+      "description": "API version (e.g., v1, v2.1)"
+    },
+    "spec-format": {
+      "type": "string",
+      "enum": ["openapi-3.0", "openapi-3.1", "asyncapi-2.0", "graphql", "grpc"],
+      "description": "API specification format"
+    },
+    "api-type": {
+      "type": "string",
+      "enum": ["rest", "graphql", "grpc", "websocket", "webhook"],
+      "description": "Type of API"
+    },
+    "base-url": {
+      "type": "string",
+      "format": "uri",
+      "description": "API base URL"
+    },
+    "authentication": {
+      "type": "string",
+      "enum": ["none", "api-key", "bearer-token", "oauth2", "basic-auth"],
+      "description": "Authentication method"
+    },
+    "owner": {
+      "type": "string",
+      "description": "API owner"
+    },
+    "consumers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "API consumers or clients"
+    },
+    "sla": {
+      "type": "object",
+      "properties": {
+        "availability": {
+          "type": "string"
+        },
+        "response-time": {
+          "type": "string"
+        },
+        "rate-limit": {
+          "type": "string"
+        }
+      },
+      "description": "Service Level Agreement"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "author": {
+      "type": "string",
+      "description": "API spec author"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "api-version", "spec-format", "api-type", "owner", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "description": "Document must have a level-0 title"
+    },
+    "sections": {
+      "required": [
+        "Overview",
+        "Endpoints",
+        "Data Models",
+        "Error Handling"
+      ],
+      "optional": [
+        "Authentication",
+        "Rate Limiting",
+        "Versioning",
+        "Examples",
+        "SDKs",
+        "Changelog",
+        "Migration Guide"
+      ],
+      "description": "Required and optional sections for API specification documents"
+    }
+  }
+}

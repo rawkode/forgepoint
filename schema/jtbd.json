@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/jtbd-v1.0.json",
+  "title": "Forgepoint Jobs-to-be-Done Schema",
+  "description": "Schema for Jobs-to-be-Done (JTBD) framework documents in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "jtbd",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this JTBD"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "review", "validated", "active", "archived"],
+      "description": "Current status of the JTBD"
+    },
+    "job-type": {
+      "type": "string",
+      "enum": ["functional", "emotional", "social"],
+      "description": "Type of job being addressed"
+    },
+    "job-statement": {
+      "type": "string",
+      "description": "Core job statement in JTBD format"
+    },
+    "customer-segment": {
+      "type": "string",
+      "description": "Target customer segment"
+    },
+    "context": {
+      "type": "string",
+      "description": "Situational context when job arises"
+    },
+    "outcome-statements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Desired outcome statements"
+    },
+    "research-source": {
+      "type": "string",
+      "description": "Source of research or validation"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Confidence level in this JTBD"
+    },
+    "author": {
+      "type": "string",
+      "description": "JTBD author"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "job-type", "job-statement", "customer-segment", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "description": "Document must have a level-0 title"
+    },
+    "sections": {
+      "required": [
+        "Job Statement",
+        "Customer Segment",
+        "Outcome Statements",
+        "Current Solutions"
+      ],
+      "optional": [
+        "Context",
+        "Underserved Outcomes",
+        "Overserved Outcomes",
+        "Competitive Landscape",
+        "Opportunity Scores",
+        "Research Evidence",
+        "Solution Ideas"
+      ],
+      "description": "Required and optional sections for JTBD documents"
+    }
+  }
+}

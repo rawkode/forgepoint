@@ -1,0 +1,80 @@
+= User Authentication Story
+:forgepoint-type: story
+:id: auth-login
+:status: in-progress
+:points: 5
+:priority: high
+:epic: security-foundation
+:sprint: 2024-Q1-S3
+:assignee: jane.doe
+:created: 2024-01-15
+:updated: 2024-01-20
+:author: Product Team
+:schema-version: 1.0
+
+[abstract]
+As a user, I want to securely authenticate into the platform using email/password or OAuth providers so that I can access my personalized content and maintain account security.
+
+== Acceptance Criteria
+
+* [ ] User can register with email/password
+* [ ] User can login with email/password
+* [ ] User can login with Google OAuth
+* [ ] User receives email verification after registration
+* [ ] Password reset flow works correctly
+* [ ] Account lockout after 5 failed attempts
+* [ ] Session expires after 24 hours of inactivity
+
+== Scenarios
+
+[source,gherkin]
+----
+Feature: User Authentication
+
+  Scenario: Successful email registration
+    Given I am on the registration page
+    When I enter valid email "user@example.com"
+    And I enter password "SecurePass123!"
+    And I click "Sign Up"
+    Then I should receive a verification email
+    And I should see "Please check your email to verify your account"
+
+  Scenario: Login with verified account
+    Given I have a verified account with email "user@example.com"
+    And I am on the login page
+    When I enter email "user@example.com"
+    And I enter password "SecurePass123!"
+    And I click "Log In"
+    Then I should be redirected to the dashboard
+    And I should see "Welcome back, User"
+
+  Scenario: Failed login attempt
+    Given I am on the login page
+    When I enter email "user@example.com"
+    And I enter incorrect password "WrongPassword"
+    And I click "Log In"
+    Then I should see "Invalid email or password"
+    And I should remain on the login page
+----
+
+== Technical Notes
+
+NOTE: Use bcrypt for password hashing with minimum 10 rounds.
+
+WARNING: Ensure OAuth tokens are stored securely and never logged.
+
+IMPORTANT: Implement rate limiting on authentication endpoints.
+
+== Dependencies
+
+* [ ] Database schema migration for users table
+* [ ] Email service configuration (SendGrid/Mailgun)
+* [ ] OAuth app credentials (Google, GitHub)
+* [ ] Redis setup for session management
+
+== Related Items
+
+* xref:prd:authentication-system[] - Main authentication PRD
+* xref:scenario:auth-e2e-tests[] - End-to-end test scenarios
+* xref:okr:2024-q1-security[] - Q1 Security OKRs
+* https://github.com/acme/app/issues/45[GitHub Issue #45]

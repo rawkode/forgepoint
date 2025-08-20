@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://forgepoint.dev/schemas/epic-v1.0.json",
+  "title": "Forgepoint Epic Schema",
+  "description": "Schema for Epic documents in Forgepoint",
+  "type": "object",
+  "properties": {
+    "forgepoint-type": {
+      "const": "epic",
+      "description": "Document type identifier"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique identifier for this epic"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "ready", "in-progress", "done", "cancelled"],
+      "description": "Current status of the epic"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Epic priority"
+    },
+    "theme": {
+      "type": "string",
+      "description": "Strategic theme or initiative"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Epic owner"
+    },
+    "team": {
+      "type": "string",
+      "description": "Responsible team"
+    },
+    "target-release": {
+      "type": "string",
+      "description": "Target release version or date"
+    },
+    "business-value": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "description": "Business value score (1-100)"
+    },
+    "effort-estimate": {
+      "type": "string",
+      "enum": ["XS", "S", "M", "L", "XL", "XXL"],
+      "description": "Epic sizing estimate"
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "Creation date (YYYY-MM-DD)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "author": {
+      "type": "string",
+      "description": "Epic author"
+    },
+    "schema-version": {
+      "const": "1.0",
+      "description": "Schema version for this document type"
+    }
+  },
+  "required": ["forgepoint-type", "id", "status", "owner", "schema-version"],
+  "additionalProperties": false,
+  "structuralRequirements": {
+    "title": {
+      "required": true,
+      "description": "Document must have a level-0 title"
+    },
+    "sections": {
+      "required": ["User Stories", "Acceptance Criteria"],
+      "optional": [
+        "Background",
+        "Business Value",
+        "Dependencies", 
+        "Risks",
+        "Definition of Done",
+        "Related Items"
+      ],
+      "description": "Required and optional sections for Epic documents"
+    },
+    "abstract": {
+      "required": true,
+      "description": "Epic should have an abstract describing the high-level goal"
+    }
+  }
+}
